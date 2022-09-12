@@ -20,3 +20,4 @@ return $results;
 
 
 echo json_encode(checkPalindrome($str_input));
+?>
