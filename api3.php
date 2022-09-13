@@ -9,15 +9,15 @@
 if (isset($_POST["password"])) {
     $password = $_POST["password"];
     // Conditions 2,3,4,5
+    $valid_pass=False;
     $number = preg_match('@[0-9]@', $password);
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $special_characater = preg_match('@[^\w]@', $password);
-    if (strlen($password) < 13 || !$number || !$uppercase || !$lowercase || !$special_characater) {
-        echo "Invalid password";
-    } else {
-        echo "Strong password";
-    }
-}
+    if (strlen($password) >= 13 && $number && $uppercase && $lowercase && $special_characater) {
+        $valid_pass=True;
+    } 
 
-?>
+    $results=["password"=>$password, "Strong"=>$valid_pass];
+    echo json_encode($results);
+}
